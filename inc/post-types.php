@@ -8,18 +8,18 @@ function js_custom_init()
 	// Register the Homepage Slides
   
      $labels = array(
-	'name' => _x('Slides', 'post type general name'),
-    'singular_name' => _x('Slide', 'post type singular name'),
-    'add_new' => _x('Add New', 'Slide'),
-    'add_new_item' => __('Add New Slide'),
-    'edit_item' => __('Edit Slides'),
-    'new_item' => __('New Slide'),
-    'view_item' => __('View Slides'),
-    'search_items' => __('Search Slides'),
-    'not_found' =>  __('No Slides found'),
-    'not_found_in_trash' => __('No Slides found in Trash'), 
+	'name' => _x('Claims', 'post type general name'),
+    'singular_name' => _x('Claim', 'post type singular name'),
+    'add_new' => _x('Add New', 'Claim'),
+    'add_new_item' => __('Add New Claim'),
+    'edit_item' => __('Edit Claims'),
+    'new_item' => __('New Claim'),
+    'view_item' => __('View Claims'),
+    'search_items' => __('Search Claims'),
+    'not_found' =>  __('No Claims found'),
+    'not_found_in_trash' => __('No Claims found in Trash'), 
     'parent_item_colon' => '',
-    'menu_name' => 'Slides'
+    'menu_name' => 'Claims'
   );
   $args = array(
 	'labels' => $labels,
@@ -36,7 +36,7 @@ function js_custom_init()
     'supports' => array('title','editor','custom-fields','thumbnail'),
 	
   ); 
-  register_post_type('slides',$args); // name used in query
+  register_post_type('claim',$args); // name used in query
   
   // Add more between here
   
