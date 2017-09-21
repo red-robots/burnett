@@ -27,7 +27,8 @@
 var project             = 'AC-Starter'; // Project Name.
 var projecturl          = 'http://localhost:8888/austincrane/ACStarter/'; // Project URL. Could be something like localhost:8888.
 
-
+var acfStyleSRC            = './assets/acf/style.scss'; 
+var acfStyleDestination    = './assets/acf/';
 var styleSRC            = './assets/sass/style.scss'; // Path to main .scss file.
 var styleDestination    = './'; // Path to place the compiled CSS file.
 								// Defualt set to root folder.
@@ -50,6 +51,7 @@ var imagesDestination	= './assets/img/'; // Destination folder of optimized imag
 
 
 // Watch files paths.
+var acfStyleWatchFiles     = './assets/acf/**/*.scss';
 var styleWatchFiles     = './assets/sass/**/*.scss'; // Path to all *.scss files inside css folder and inside them.
 var vendorJSWatchFiles  = './assets/js/vendors/*.js'; // Path to all vendors JS files.
 var customJSWatchFiles  = './assets/js/custom/*.js'; // Path to all custom JS files.
@@ -175,8 +177,20 @@ gulp.task('styles', function () {
 		.pipe( browserSync.stream() )
 		.pipe( notify( { message: 'TASK: "styles" Completed!', onLast: true } ) )
 });
+/* acf styles*/
+gulp.task('acf_styles', function () {
+	gulp.src( acfStyleSRC )
+	   .pipe(sass().on('error', sass.logError))
+	   .pipe( gulp.dest( acfStyleDestination ) )
 
 
+	   .pipe( rename( { suffix: '.min' } ) )
+	   .pipe( minifycss( {
+		   maxLineLen: 10
+	   }))
+	   .pipe( gulp.dest( acfStyleDestination ) )
+	   .pipe( notify( { message: 'TASK: "acf styles" Completed!', onLast: true } ) )
+});
 /**
  * Task: `vendorJS`.
  *
@@ -269,8 +283,9 @@ gulp.task( 'images', function() {
   *
   * Watches for file changes and runs specific tasks.
   */
- gulp.task( 'default', ['styles', 'vendorsJs', 'customJS', 'images', 'browser-sync'], function () {
- 	gulp.watch( styleWatchFiles, [ 'styles' ] );
+ gulp.task( 'default', ['styles', 'acf_styles', 'vendorsJs', 'customJS', 'images', 'browser-sync'], function () {
+	gulp.watch( styleWatchFiles, [ 'styles' ] );
+	gulp.watch( acfStyleWatchFiles, [ 'acf_styles' ] );
  	gulp.watch( vendorJSWatchFiles, [ 'vendorsJs', reload ]  );
  	gulp.watch( customJSWatchFiles, [ 'customJS', reload ]  );
  });

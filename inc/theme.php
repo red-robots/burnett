@@ -143,3 +143,8 @@ function ac_first_and_last_menu_class($items) {
   return $items;
 }
 add_filter('wp_nav_menu_objects', 'ac_first_and_last_menu_class');
+
+function bella_acf_input_admin_head(){
+  wp_enqueue_style( 'bella_acf_input_admin_head',get_template_directory_uri().'/assets/acf/style.css' );
+}
+add_action('acf/input/admin_head', 'bella_acf_input_admin_head');
